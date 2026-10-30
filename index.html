@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set To Hate — загрузки</title>
+<meta name="description" content="График загрузок видео Set To Hate по соцсетям: превью, трек, даты и время">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0d'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23e11d48' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23e11d48'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg:#0a0a0c; --panel:#131317; --panel2:#191920; --line:#26262e;
+    --txt:#eeeef2; --mut:#8d8d99; --acc:#e11d48; --ok:#34d399; --plan:#fbbf24;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-padding-top: 96px; }
+  body { margin:0; background:radial-gradient(1200px 600px at 50% -10%, #1a0a10 0%, var(--bg) 55%) no-repeat, var(--bg);
+         color:var(--txt); font:15px/1.45 "Segoe UI", Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  .wrap { max-width:1120px; margin:0 auto; padding:26px 18px 60px; }
+
+  header .kicker { color:var(--acc); font-size:12px; letter-spacing:.22em; text-transform:uppercase; font-weight:700; }
+  h1 { font-size:34px; line-height:1.1; margin:6px 0 4px; letter-spacing:-.02em; }
+  h1 span { color:var(--mut); font-weight:400; }
+  .sub { color:var(--mut); font-size:13.5px; }
+  .sub b { color:#c9c9d4; font-weight:600; }
+
+  .stats { display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 6px; }
+  .stat { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 13px; min-width:118px; flex:1 1 0; }
+  .stat .n { font-size:22px; font-weight:700; letter-spacing:-.02em; }
+  .stat .l { font-size:11.5px; color:var(--mut); text-transform:uppercase; letter-spacing:.08em; margin-top:2px; }
+  .stat .s { font-size:11.5px; color:var(--mut); margin-top:3px; }
+  .stat.acc { border-color:#4a1620; background:linear-gradient(180deg,#1d0d12,#131317); }
+
+  .legend { display:flex; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--mut); margin:14px 0 0; }
+  .legend i { font-style:normal; }
+  .legend .g { color:var(--ok); }
+  .legend .y { color:var(--plan); }
+
+  .bar { position:sticky; top:0; z-index:20; margin:20px -18px 18px; padding:10px 18px; background:rgba(10,10,12,.92);
+          backdrop-filter:blur(10px); border-bottom:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .fbtn { border:1px solid var(--line); background:var(--panel); color:#c8c8d2; border-radius:999px; padding:7px 13px;
+           font-size:13px; cursor:pointer; font-family:inherit; transition:.15s; }
+  .fbtn:hover { border-color:#3a3a46; color:#fff; }
+  .fbtn.on { background:var(--acc); border-color:var(--acc); color:#fff; font-weight:600; }
+  .bar .sp { flex:1; }
+  .bar .note { font-size:12px; color:var(--mut); }
+
+  .month { font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--mut); margin:26px 0 12px; display:flex; align-items:center; gap:10px; }
+  .month:after { content:""; flex:1; height:1px; background:var(--line); }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(430px,1fr)); gap:14px; align-items:start; }
+  .card { display:flex; gap:14px; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:12px;
+           transition:.15s; }
+  .card:hover { border-color:#3a3a46; background:var(--panel2); }
+  .thumb { position:relative; flex:0 0 108px; height:192px; border-radius:10px; overflow:hidden; background:#000; }
+  .thumb img { display:block; width:100%; height:100%; object-fit:cover; }
+  .dur { position:absolute; right:5px; bottom:5px; background:rgba(0,0,0,.72); color:#fff; font-size:11px;
+          padding:1px 5px; border-radius:5px; }
+  .body { flex:1; min-width:0; display:flex; flex-direction:column; }
+  .top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .date { font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--acc); font-weight:700; }
+  .have { font-size:11.5px; color:var(--mut); border:1px solid var(--line); border-radius:6px; padding:1px 6px; }
+  .card h3 { margin:4px 0 1px; font-size:18px; letter-spacing:-.01em; }
+  .cap { font-size:11.5px; color:var(--mut); margin-bottom:9px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .plats { display:flex; flex-direction:column; gap:5px; margin-top:auto; }
+  .pl { display:flex; align-items:center; gap:7px; font-size:12.5px; border:1px solid var(--line); border-radius:9px;
+         padding:4px 8px; background:#101014; }
+  a.pl:hover { border-color:#3a3a46; background:#16161b; }
+  .pl .dot { width:7px; height:7px; border-radius:50%; flex:0 0 7px; background:#444; }
+  .pl .pname { color:#d6d6de; min-width:70px; }
+  .pl .pval { color:var(--mut); flex:1; text-align:right; font-variant-numeric:tabular-nums; }
+  .pl .mark { font-size:12px; width:12px; text-align:center; }
+  .pl-fact { border-color:#17402f; background:#0d1b15; }
+  .pl-fact .pval { color:var(--ok); }
+  .pl-fact .mark { color:var(--ok); }
+  .pl-plan { border-color:#3d3418; border-style:dashed; background:#171308; }
+  .pl-plan .pval { color:var(--plan); }
+  .pl-plan .mark { color:var(--plan); }
+  .pl-none .pval { color:#5c5c66; }
+  .pl-none .mark { color:#3a3a44; }
+
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin-top:16px; }
+  .panel h2 { font-size:15px; margin:0 0 10px; letter-spacing:.02em; }
+  .panel ul { margin:0; padding-left:18px; color:#b9b9c4; font-size:13px; }
+  .panel li { margin-bottom:7px; }
+  .panel li a { color:var(--acc); }
+  .mini-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:8px; }
+  .mini { display:flex; gap:8px; align-items:center; border:1px solid var(--line); border-radius:9px; padding:6px 9px; font-size:12.5px; background:#101014; }
+  .mini:hover { border-color:#3a3a46; }
+  .mini-d { color:var(--acc); font-variant-numeric:tabular-nums; }
+  .mini-t { color:#c5c5cf; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  footer { color:#5c5c66; font-size:11.5px; margin-top:26px; line-height:1.6; }
+  footer code { background:#15151a; border:1px solid var(--line); border-radius:5px; padding:1px 5px; font-size:11px; }
+
+  @media (max-width:760px) {
+    .wrap { padding:20px 13px 50px; }
+    .bar { margin-left:-13px; margin-right:-13px; padding:10px 13px; }
+    h1 { font-size:26px; }
+    .grid { grid-template-columns:1fr; }
+    .stat { min-width:calc(50% - 5px); }
+    .thumb { flex:0 0 88px; height:156px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Set To Hate · контент-план</div>
+    <h1>График загрузок <span>окт — ноя 2026</span></h1>
+    <div class="sub">14 вертикальных видео в пачке · обновлено <b>30.10.2026 14:49</b></div>
+    <div class="stats">
+      <div class="stat acc"><div class="n">14</div><div class="l">видео в пачке</div><div class="s">8 уже с датой в прошлом</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">TikTok</div><div class="s">запланировано, проверено</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">YouTube</div><div class="s">опубликовано, проверено</div></div>
+      <div class="stat"><div class="n">14</div><div class="l">Instagram</div><div class="s">по плану от 21.10</div></div>
+      <div class="stat"><div class="n">11</div><div class="l">Facebook</div><div class="s">по плану от 21.10</div></div>
+    </div>
+    <div class="legend">
+      <i class="g">✓ факт — взято из кабинета площадки</i>
+      <i class="y">◌ план — из файла плана, в кабинете не проверено</i>
+      <i>— не залито</i>
+    </div>
+  </header>
+
+  <nav class="bar">
+    <button class="fbtn on" data-f="all">Все</button>
+    <button class="fbtn" data-f="The Pit">The Pit</button>
+    <button class="fbtn" data-f="I Speak Hate">I Speak Hate</button>
+    <button class="fbtn" data-f="Delirium">Delirium</button>
+    <span class="sp"></span>
+    <button class="fbtn" data-f="gaps">Только с пробелами</button>
+  </nav>
+
+  <div id="list"></div>
+
+  <div class="panel" id="attention">
+    <h2>Требует внимания</h2>
+    <ul><li><b>TikTok</b> — 02.11 19:00: пост «трек 🎧 set to hate - delirium» есть в кабинете, но файла с таким треком на эту дату в папке нет. <a href="https://www.tiktok.com/@.set_to_hate/video/7698248547950529813" target="_blank" rel="noopener">открыть</a></li><li><b>YouTube</b> — 21.10 14:35: «🎧 Set To Hate - Delirium» опубликован, но в папке нет файла на эту дату. <a href="https://youtube.com/shorts/HGnhStoaLVg" target="_blank" rel="noopener">открыть</a></li><li><b>Instagram и Facebook</b> — даты взяты из плана загрузок от 21.10.2026, в кабинетах Meta не перепроверены: сессии в браузере истекли, войти нужно заново.</li></ul>
+  </div>
+
+  <div class="panel">
+    <h2>Другие посты на YouTube (мемы, вне пачки)</h2>
+    <div class="mini-grid"><a class="mini" href="https://youtube.com/shorts/TpT1PI1d6jY" target="_blank" rel="noopener"><span class="mini-d">29.10</span><span class="mini-t">WTF was that?!?</span></a><a class="mini" href="https://youtube.com/shorts/rMUyB6QED6Y" target="_blank" rel="noopener"><span class="mini-d">28.10</span><span class="mini-t">What a move!</span></a><a class="mini" href="https://youtube.com/shorts/8dd2QNDJzrk" target="_blank" rel="noopener"><span class="mini-d">27.10</span><span class="mini-t">It hurts so what</span></a><a class="mini" href="https://youtube.com/shorts/VQEZcM9aJ9A" target="_blank" rel="noopener"><span class="mini-d">27.10</span><span class="mini-t">Watch your head bro</span></a><a class="mini" href="https://youtube.com/shorts/DFZTbGon5S4" target="_blank" rel="noopener"><span class="mini-d">26.10</span><span class="mini-t">Wait that’s illegal</span></a><a class="mini" href="https://youtube.com/shorts/MhGHD28jz_Y" target="_blank" rel="noopener"><span class="mini-d">24.10</span><span class="mini-t">Ouch!</span></a><a class="mini" href="https://youtube.com/shorts/dO3rdcuz1r0" target="_blank" rel="noopener"><span class="mini-d">23.10</span><span class="mini-t">Watch out kid!</span></a><a class="mini" href="https://youtube.com/shorts/-3yoAPVNg_s" target="_blank" rel="noopener"><span class="mini-d">20.10</span><span class="mini-t">Watch your head!</span></a><a class="mini" href="https://youtube.com/shorts/rBmO63mgpZk" target="_blank" rel="noopener"><span class="mini-d">19.10</span><span class="mini-t">Разозлил Ольгу Бузову своими криками</span></a></div>
+  </div>
+
+  <footer>
+    Источники: TikTok Studio (запланированные публикации) · YouTube RSS канала Set To Hate · план загрузок от 21.10.2026 · превью — кадры из файлов в
+    <code>E:\video\ДЛЯ МОНТАЖА\Загрузки 2010</code>.<br>
+    Обновить данные: <code>python scripts\make_thumbs.py</code> затем <code>python scripts\sth_page_data.py</code> и <code>python scripts\build_page.py</code>.
+  </footer>
+</div>
+
+<script>
+const VIDEOS = [{"key": "10-21", "day": 21, "month": 10, "year": 2026, "date": "2026-10-21", "title": "🎧 Set To Hate - The Pit", "track": "The Pit", "file": "21 октября 🎧 Set To Hate - The Pit.mp4", "sub": "фейсбук, инстагрм, ютуб", "size": 72533109, "duration": 15.7, "thumb": "thumbs/10-21.jpg", "platforms": {"youtube": {"status": "fact", "date": "2026-10-22", "time": "00:00", "url": "https://youtube.com/shorts/oSLl1fbhaP4", "cover": "", "views": null, "delta": 1}, "instagram": {"status": "plan", "date": "2026-10-21", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-10-21", "time": "19:00"}}}, {"key": "10-22", "day": 22, "month": 10, "year": 2026, "date": "2026-10-22", "title": "🎧 Set To Hate - I Speak Hate", "track": "I Speak Hate", "file": "22 октября  🎧 Set To Hate - I Speak Hate.mp4", "sub": "", "size": 46024486, "duration": 15.1, "thumb": "thumbs/10-22.jpg", "platforms": {"youtube": {"status": "fact", "date": "2026-10-22", "time": "00:00", "url": "https://youtube.com/shorts/-gEhKFkndY4", "cover": "", "views": null, "delta": 0}, "instagram": {"status": "plan", "date": "2026-10-22", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-10-22", "time": "19:00"}}}, {"key": "10-23", "day": 23, "month": 10, "year": 2026, "date": "2026-10-23", "title": "🎧 Set To Hate - The Pit", "track": "The Pit", "file": "23 октября 🎧 Set To Hate - The Pit.mp4", "sub": "фейсбук, инстагрм, ютуб", "size": 47895193, "duration": 10.5, "thumb": "thumbs/10-23.jpg", "platforms": {"instagram": {"status": "plan", "date": "2026-10-23", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-10-23", "time": "19:00"}}}, {"key": "10-24", "day": 24, "month": 10, "year": 2026, "date": "2026-10-24", "title": "🎧 Set To Hate - I Speak Hate", "track": "I Speak Hate", "file": "24 октября 🎧 Set To Hate - I Speak Hate.mp4", "sub": "", "size": 35561135, "duration": 11.9, "thumb": "thumbs/10-24.jpg", "platforms": {"instagram": {"status": "plan", "date": "2026-10-24", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-10-24", "time": "19:00"}}}, {"key": "10-25", "day": 25, "month": 10, "year": 2026, "date": "2026-10-25", "title": "🎧 Set To Hate - I Speak Hate", "track": "I Speak Hate", "file": "25 октября (🎧 Set To Hate - I Speak Hate).mp4", "sub": "", "size": 50827140, "duration": 17.0, "thumb": "thumbs/10-25.jpg", "platforms": {"youtube": {"status": "fact", "date": "2026-10-25", "time": "00:00", "url": "https://youtube.com/shorts/yYafOb9NcqM", "cover": "", "views": null, "delta": 0}, "instagram": {"status": "plan", "date": "2026-10-25", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-10-25", "time": "19:00"}}}, {"key": "10-26", "day": 26, "month": 10, "year": 2026, "date": "2026-10-26", "title": "🎧 Set To Hate - Delirium", "track": "Delirium", "file": "26 октября 🎧 Set To Hate - Delirium.mp4", "sub": "тикток, инстаграм, ютуб", "size": 95672179, "duration": 20.9, "thumb": "thumbs/10-26.jpg", "platforms": {"instagram": {"status": "plan", "date": "2026-10-26", "time": "19:00"}}}, {"key": "10-28", "day": 28, "month": 10, "year": 2026, "date": "2026-10-28", "title": "🎧 Set To Hate - Delirium", "track": "Delirium", "file": "28 октября 🎧 Set To Hate - Delirium.mp4", "sub": "", "size": 70771407, "duration": 16.8, "thumb": "thumbs/10-28.jpg", "platforms": {"youtube": {"status": "fact", "date": "2026-10-28", "time": "00:00", "url": "https://youtube.com/shorts/ZSNe5ttWyoU", "cover": "", "views": null, "delta": 0}, "instagram": {"status": "plan", "date": "2026-10-28", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-10-28", "time": "19:00"}}}, {"key": "10-30", "day": 30, "month": 10, "year": 2026, "date": "2026-10-30", "title": "🎧 Set To Hate - Delirium", "track": "Delirium", "file": "30 октября🎧 Set To Hate - Delirium.mp4", "sub": "", "size": 63637236, "duration": 15.3, "thumb": "thumbs/10-30.jpg", "platforms": {"youtube": {"status": "fact", "date": "2026-10-30", "time": "00:00", "url": "https://youtube.com/shorts/IKASRXJYdTg", "cover": "", "views": null, "delta": 0}, "instagram": {"status": "plan", "date": "2026-10-30", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-10-30", "time": "19:00"}}}, {"key": "11-02", "day": 2, "month": 11, "year": 2026, "date": "2026-11-02", "title": "🎧 Set To Hate - The Pit", "track": "The Pit", "file": "2 нобря 🎧 Set To Hate - The Pit.mp4", "sub": "фейсбук, инстагрм, ютуб", "size": 67750982, "duration": 14.6, "thumb": "thumbs/11-02.jpg", "platforms": {"instagram": {"status": "plan", "date": "2026-11-02", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-11-02", "time": "19:00"}}}, {"key": "11-05", "day": 5, "month": 11, "year": 2026, "date": "2026-11-05", "title": "🎧 Set To Hate - I Speak Hate", "track": "I Speak Hate", "file": "5 ноября 🎧 Set To Hate - I Speak Hate.mp4", "sub": "", "size": 59928906, "duration": 15.0, "thumb": "thumbs/11-05.jpg", "platforms": {"tiktok": {"status": "fact", "date": "2026-11-05", "time": "12:30", "url": "https://www.tiktok.com/@.set_to_hate/video/7698675568723676436", "cover": "https://image-sg.tiktok.com/tos-alisg-p-0037/o4AAgEmCVDA7Y3fiADFIGuerFACISQfrLE2tum~tplv-noop.jpeg?dr=14695&policy=eyJ2bSI6MywidWlkIjoiNzU3ODU0Nzk0NDc0NDk5MzgwNCJ9&refresh_token=4643fe62&x-orig-authkey=953b87ea9b474969e4eab20d5c7fa858d23f02a8&x-orig-expires=1793379600&x-orig-sign=AVXxDAwBXvf8dDUEt3pHlF2%2BytU%3D&t=4d5b0474&ps=c6edb45e&shp=9babb075&shcp=8ee3610a&idc=my2&ftpl=1", "views": "0", "delta": 0}, "instagram": {"status": "plan", "date": "2026-11-05", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-11-05", "time": "19:00"}}}, {"key": "11-07", "day": 7, "month": 11, "year": 2026, "date": "2026-11-07", "title": "🎧 Set To Hate - I Speak Hate", "track": "I Speak Hate", "file": "7 ноября  🎧 Set To Hate - I Speak Hate.mp4", "sub": "", "size": 49415850, "duration": 13.0, "thumb": "thumbs/11-07.jpg", "platforms": {"tiktok": {"status": "fact", "date": "2026-11-07", "time": "12:30", "url": "https://www.tiktok.com/@.set_to_hate/video/7698675944889863445", "cover": "https://image-sg.tiktok.com/tos-alisg-p-0037/oEDghOBViAKyaMXsAKKFAB1BY8jEIUAfw15jQi~tplv-noop.jpeg?dr=14695&policy=eyJ2bSI6MywidWlkIjoiNzU3ODU0Nzk0NDc0NDk5MzgwNCJ9&refresh_token=a2355ab3&x-orig-authkey=953b87ea9b474969e4eab20d5c7fa858d23f02a8&x-orig-expires=1793379600&x-orig-sign=LIinBIGToDzrCB3OWU9MTqb5Elw%3D&t=4d5b0474&ps=c6edb45e&shp=9babb075&shcp=8ee3610a&idc=my2&ftpl=1", "views": "0", "delta": 0}, "instagram": {"status": "plan", "date": "2026-11-07", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-11-07", "time": "19:00"}}}, {"key": "11-08", "day": 8, "month": 11, "year": 2026, "date": "2026-11-08", "title": "🎧 Set To Hate - I Speak Hate", "track": "I Speak Hate", "file": "8 ноября 🎧 Set To Hate - I Speak Hate.mp4", "sub": "тикток, инстаграм, ютуб", "size": 39992341, "duration": 10.9, "thumb": "thumbs/11-08.jpg", "platforms": {"tiktok": {"status": "fact", "date": "2026-11-08", "time": "12:35", "url": "https://www.tiktok.com/@.set_to_hate/video/7698676194669284628", "cover": "https://image-sg.tiktok.com/tos-alisg-p-0037/oMIAurfJIKMAFAWmWyQAGLIGRYGb2XAeKeGfjk~tplv-noop.jpeg?dr=14695&policy=eyJ2bSI6MywidWlkIjoiNzU3ODU0Nzk0NDc0NDk5MzgwNCJ9&refresh_token=0ff9de0d&x-orig-authkey=953b87ea9b474969e4eab20d5c7fa858d23f02a8&x-orig-expires=1793379600&x-orig-sign=lw%2B3QeWTFRgThO3CXR8ltGDxAn0%3D&t=4d5b0474&ps=c6edb45e&shp=9babb075&shcp=8ee3610a&idc=my2&ftpl=1", "views": "0", "delta": 0}, "instagram": {"status": "plan", "date": "2026-11-08", "time": "19:00"}}}, {"key": "11-10", "day": 10, "month": 11, "year": 2026, "date": "2026-11-10", "title": "🎧 Set To Hate - The Pit", "track": "The Pit", "file": "10 ноября 🎧 Set To Hate - The Pit.mp4", "sub": "тикток, инстаграм, ютуб", "size": 98836116, "duration": 20.9, "thumb": "thumbs/11-10.jpg", "platforms": {"tiktok": {"status": "fact", "date": "2026-11-10", "time": "12:35", "url": "https://www.tiktok.com/@.set_to_hate/video/7698676390220057877", "cover": "https://image-sg.tiktok.com/tos-alisg-p-0037/ogAABCVqcEQAAVbIFBXfCFM1DDBAyzE4KzU9fg~tplv-noop.jpeg?dr=14695&policy=eyJ2bSI6MywidWlkIjoiNzU3ODU0Nzk0NDc0NDk5MzgwNCJ9&refresh_token=011f332a&x-orig-authkey=953b87ea9b474969e4eab20d5c7fa858d23f02a8&x-orig-expires=1793379600&x-orig-sign=NBvtGNzDYsvmbhyccy24X8RPBds%3D&t=4d5b0474&ps=c6edb45e&shp=9babb075&shcp=8ee3610a&idc=my2&ftpl=1", "views": "0", "delta": 0}, "instagram": {"status": "plan", "date": "2026-11-10", "time": "19:00"}}}, {"key": "11-12", "day": 12, "month": 11, "year": 2026, "date": "2026-11-12", "title": "🎧 Set To Hate - I Speak Hate", "track": "I Speak Hate", "file": "12 ноября 🎧 Set To Hate - I Speak Hate.mp4", "sub": "", "size": 50697329, "duration": 16.8, "thumb": "thumbs/11-12.jpg", "platforms": {"tiktok": {"status": "fact", "date": "2026-11-12", "time": "12:35", "url": "https://www.tiktok.com/@.set_to_hate/video/7698676568729685269", "cover": "https://image-sg.tiktok.com/tos-alisg-p-0037/oYEEXLVhmEAWDWGCIeiHA4AAIKMPerfBFDMArY~tplv-noop.jpeg?dr=14695&policy=eyJ2bSI6MywidWlkIjoiNzU3ODU0Nzk0NDc0NDk5MzgwNCJ9&refresh_token=f50ba171&x-orig-authkey=953b87ea9b474969e4eab20d5c7fa858d23f02a8&x-orig-expires=1793379600&x-orig-sign=JRJ7K3ByvAS3j1Wqz4YkJFckadM%3D&t=4d5b0474&ps=c6edb45e&shp=9babb075&shcp=8ee3610a&idc=my2&ftpl=1", "views": "0", "delta": 0}, "instagram": {"status": "plan", "date": "2026-11-12", "time": "19:00"}, "facebook": {"status": "plan", "date": "2026-11-12", "time": "19:00"}}}];
+const MON = ['','янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
+const MN = {10:'октябрь 2026', 11:'ноябрь 2026', 12:'декабрь 2026'};
+const PLAT = [['tiktok','TikTok','#25f4ee'],['instagram','Instagram','#e1306c'],['facebook','Facebook','#1877f2'],['youtube','YouTube','#ff0033']];
+const DOW = ['пн','вт','ср','чт','пт','сб','вс'];
+
+function cell(name, color, meta) {
+  if (!meta) return `<div class="pl pl-none"><span class="dot"></span><span class="pname">${name}</span><span class="pval">не залито</span></div>`;
+  const [y,m,d] = meta.date.split('-').map(Number);
+  const ds = d + ' ' + MON[m];
+  const val = (ds + (meta.time ? ', ' + meta.time : ''));
+  const cls = meta.status === 'fact' ? 'pl-fact' : 'pl-plan';
+  const mark = meta.status === 'fact' ? '✓' : '◌';
+  const inner = `<span class="dot" style="background:${color}"></span><span class="pname">${name}</span><span class="pval">${val}</span><span class="mark">${mark}</span>`;
+  return meta.url ? `<a class="${cls}" href="${meta.url}" target="_blank" rel="noopener">${inner}</a>` : `<div class="${cls}">${inner}</div>`;
+}
+
+function card(v) {
+  const dt = new Date(v.date + 'T00:00:00');
+  const have = PLAT.filter(p => v.platforms[p[0]]).length;
+  const rows = PLAT.map(p => cell(p[1], p[2], v.platforms[p[0]])).join('');
+  return `<article class="card" data-track="${v.track}" data-have="${have}">
+    <div class="thumb"><img src="${v.thumb}" alt="${v.title}" loading="lazy"><span class="dur">${Math.round(v.duration||0)}с</span></div>
+    <div class="body">
+      <div class="top"><span class="date">${dt.getDate()} ${MON[dt.getMonth()+1]} · ${DOW[(dt.getDay()+6)%7]}</span><span class="have">${have}/4</span></div>
+      <h3>${v.track}</h3>
+      <div class="cap">🎧 Set To Hate — ${v.track} · ${(v.size/1048576).toFixed(0)} МБ</div>
+      <div class="plats">${rows}</div>
+    </div>
+  </article>`;
+}
+
+let filter = 'all';
+function render() {
+  const list = document.getElementById('list');
+  let items = VIDEOS.slice().sort((a,b) => a.date < b.date ? -1 : 1);
+  if (filter === 'gaps') items = items.filter(v => PLAT.some(p => !v.platforms[p[0]]));
+  else if (filter !== 'all') items = items.filter(v => v.track === filter);
+  let html = '', m = null;
+  for (const v of items) {
+    const mm = Number(v.date.slice(5,7));
+    if (mm !== m) { if (m !== null) html += '</div>'; html += `<div class="month">${MN[mm]||mm}</div><div class="grid">`; m = mm; }
+    html += card(v);
+  }
+  if (m !== null) html += '</div>';
+  list.innerHTML = html || '<div class="panel">Ничего не найдено под этот фильтр.</div>';
+}
+
+document.querySelectorAll('.fbtn').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  filter = b.dataset.f;
+  render();
+});
+render();
+</script>
+</body>
+</html>
